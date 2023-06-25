@@ -1,0 +1,81 @@
+#map { 
+    height: 980px; 
+}
+/* 
+.leaflet-popup-content-wrapper {
+
+}
+
+.leflet-popup-content {
+
+} */
+
+/* h1 {
+    font-family: "Roboto Slab";
+    font-size: 16px;
+}
+
+h3 {
+    font-family: "Raleway";
+    font-size: 8px;
+} */
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .header {
+    background-color: #314196;
+    color: #e9eae3;
+    font-family: 'Roboto Slab';
+    text-align: center;
+    font-size: 18pt;
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+  }
+
+  .eventTheme {
+    font-family: 'Brittany Signature';
+    font-size: 14pt;
+  }
+
+  .table-layout {
+    width: 100%
+  }
+  
+  table {
+    font-family: "Raleway";
+    font-size: 12px;
+    border: dashed #4f4f59 1px;
+    border-radius: 4px;
+    padding: 4px;
+  }
+  
+  th {
+    background-color: #29919f;
+    color: #e9eae3;
+    padding: 6px;
+    border-radius: 2px;
+  }
+  
+  td {
+    text-align: center;
+  }
+  
+  .photo {
+    display: flex;
+    width: 250px;
+    height: 250px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+  }
