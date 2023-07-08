@@ -1,4 +1,4 @@
-markerid,storeid,street,citn,state,latitude,longitude,zipcode,categories,inperson_n_h
+markerid,storeid,street,city,state,latitude,longitude,zipcode,categories,inperson_n_h
 1891,100394,328 Main St,narmouth,NS,43.83601,-66.120009,B5A 1E4,Pets,n
 695,101460,520 Main St,narmouth,NS,43.843968,-66.117804,B5A 1H8,Parents,n
 294,100303,75 Starrs Rd,narmouth,NS,43.843741,-66.106436,B5A 2T6,Spouses / Significant Others,n
