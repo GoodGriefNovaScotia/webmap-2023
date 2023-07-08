@@ -48,13 +48,56 @@ var customLayer = L.geoJson(null, {
     var category = layer.feature.properties.categories;
     var inperson_n_h = layer.feature.properties.inperson_n_h;
 
-    // Pop-up
-    var eventLocation = feature.properties.street + ", " + feature.properties.city + ", " + feature.properties.state + ", " + feature.properties.zipcode
-    var popupContent = `<div class="wrapper">
+      // Pop-ups
+      // Event Location
+      var eventLocation = feature.properties.street + ", " + feature.properties.city + ", " + feature.properties.state + ", " + feature.properties.zipcode
+      // In-person pop-up
+      var popupContent = `<div class="wrapper">
+      <div class="header">
+        <div class="eventName">
+        Event Name <br>
+        <span class="eventTheme">` + feature.properties.categories + `</span>
+        </div>
+        </div>
+      <div class="photo">
+        <img src='https://images.squarespace-cdn.com/content/v1/64513cfe109e8268a6a4d0fc/1686702891197-5I10H5UT5BKV0D6SBNSP/nataliia-kvitovska-ah9muNXpCP0-unsplash+%281%29.jpg?format=1500w'>
+      </div>
+      <div class="table-layout">
+      <table>
+        <tr>
+          <th>Event Date:</th>
+          <td>`+ feature.properties.markerid + `</td>
+        </tr>
+        <tr>
+          <th>Event Organizer:</th>
+          <td>Organizer #` + feature.properties.storeid + `</td>
+        </tr>
+        <tr>
+          <th>Event Location:</th>
+          <td>` + eventLocation + `</td>
+        </tr>
+      </table>
+      </div>
+      <div class="footer">
+      <button class="learnMoreBtn">
+      Learn More...
+      </button>
+      <button class="buyTicketsBtn">
+      Buy Tickets
+      </button>
+      </div>
+    </div>`
+    //Hybrid pop-up
+    var hybridPopupContent = `<div class="wrapper">
     <div class="header">
-      Event Name <br>
-      <span class="eventTheme">` + feature.properties.categories + `</span>
+    <div class="virtual">
+    Virtual Option Available!
     </div>
+    <div class="eventName">
+    Event Name <br>
+    <span class="eventTheme">` + feature.properties.categories + `</span>
+    </div>
+  </div>
     <div class="photo">
       <img src='https://images.squarespace-cdn.com/content/v1/64513cfe109e8268a6a4d0fc/1686702891197-5I10H5UT5BKV0D6SBNSP/nataliia-kvitovska-ah9muNXpCP0-unsplash+%281%29.jpg?format=1500w'>
     </div>
@@ -74,8 +117,21 @@ var customLayer = L.geoJson(null, {
       </tr>
     </table>
     </div>
+    <div class="footer">
+    <button class="learnMoreBtn">
+    Learn More...
+    </button>
+    <button class="buyTicketsBtn">
+    Buy Tickets
+    </button>
+    </div>
   </div>`
+	  
+  if (inperson_n_h == "h") {
+    layer.bindPopup(hybridPopupContent);
+  } else if (inperson_n_h == "n") {
     layer.bindPopup(popupContent);
+  }
 
     allEvents.addLayer(layer);
 
