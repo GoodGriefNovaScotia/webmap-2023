@@ -8,38 +8,46 @@
         <title>IWG Web Map</title>
 
         <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-        crossorigin=""/>
-        <link
-            rel="stylesheet"
-            href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css"
-        />
-        <!-- <link rel="stylesheet" href="css/styledLayerControl.css" />
-        <script src="src/styledLayerControl.js"></script> -->
-
-        <!--Leaflet Layer Control Copy-->
-        <script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false&key=AIzaSyDeqZIQXFKMXqYccaxFFHtsxlhafvRFeQ4"></script>
-        <!-- <script src="https://raruto.github.io/cdn/leaflet-google/0.0.3/leaflet-google.js"></script> -->
-		
-		<!-- <script src="plugins/Bing.js"></script> -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+        <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+        <script src="https://unpkg.com/leaflet.markercluster.layersupport@2.0.1/dist/leaflet.markercluster.layersupport.js"></script>
+        <script src="https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js"></script>
+        <!--Leaflet Marker Feature Group Subgroup-->
+        <!-- <script src="https://unpkg.com/leaflet.featuregroup.subgroup@1.0.2/dist/leaflet.featuregroup.subgroup.js"></script> -->
+        <!-- <script src="leaflet.featuregroup.subgroup.js"></script> -->
+        <!-- Geosearch-->
+        <!-- <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script> -->
         <!-- Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Roboto Slab' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
         <link href="https://fonts.cdnfonts.com/css/brittany-signature" rel="stylesheet">
     </head>
 <body>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-        crossorigin=""></script>
+    <!-- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" -->
+        <!-- integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" -->
+        <!-- crossorigin=""></script> -->
       <!-- Load jQuery and PapaParse to read data from a CSV file -->
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script> -->
 
     <!-- Omnivore -->
-    <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
-    <!-- leaflet-geosearch -->
-    <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script>
+    <!-- <script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>   -->
+
+    <!-- Leaflet Marker Cluster-->
+    <!-- <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script> -->
+
+    <!--Leaflet Marker Feature Group Subgroup-->
+    <!-- <script src="https://unpkg.com/leaflet.featuregroup.subgroup@1.0.2/dist/leaflet.featuregroup.subgroup.js"></script> -->
+    <!-- <script src="leaflet.featuregroup.subgroup.js"></script> -->
+
+    <!--Leaflet Marker Cluster Layer Support-->
+    <!-- <script src="https://unpkg.com/leaflet.markercluster.layersupport@2.0.1/dist/leaflet.markercluster.layersupport.js"></script> -->
+
+    <!-- Geosearch-->
+    <!-- <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script> -->
     <div id="map"></div>
     <script src="index.js"></script>
 </body>
