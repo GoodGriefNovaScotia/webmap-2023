@@ -286,15 +286,15 @@ var runLayer = omnivore.csv('./test_data.csv', null, customLayer)
     var layerControl = L.control.layers(baseMaps, overlayMaps, {collapsed:true}).addTo(map);
     // layerControl.addOverlay(allEvents, "All Events") // Add "All Events" layer to the control manually
 
-    // // Find the input element for the "All Events" overlay and set its checked property to true
-    // var inputs = document.getElementsByClassName('leaflet-control-layers-overlays')[0].getElementsByTagName('input');
-    // for (var i = 0; i < inputs.length; i++) {
-    //   var label = inputs[i].parentNode;
-    //   if (label.textContent.trim() === 'All Events') {
-    //     inputs[i].checked = true;
-    //     break;
-    //   }
-    // }
+    // Find the input element for the "All Events" overlay and set its checked property to true
+    var inputs = document.getElementsByClassName('leaflet-control-layers-overlays')[0].getElementsByTagName('input');
+    for (var i = 0; i < inputs.length; i++) {
+      var label = inputs[i].parentNode;
+      if (label.textContent.trim() === 'All Events') {
+        inputs[i].checked = true;
+        break;
+      }
+    }
 })
   .addTo(map);
 
