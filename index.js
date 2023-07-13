@@ -1,4 +1,6 @@
 
+const apiKey = "AAPK8bbb74889b114972a097d3b569b1f56cEK43n-TDHRsY6priZyHNqn5cP4439uEmTkqYOqWMIv2tAAMgwJNO8C8jqXKjnBXV";
+
 // OSM HOT Basemap
 var OpenStreetMap_HOT = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 	maxZoom: 19,
@@ -20,35 +22,9 @@ var markerClusterOptions = {
   zoomToBoundsOnClick: true
 };
 
-// // Set up Layer Groups
-// // Categorical
-// var allEvents = L.markerClusterGroup(markerClusterOptions);
-// var eventsPets = L.featureGroup.subGroup(allEvents);
-// var eventsParents = L.featureGroup.subGroup(allEvents);
-// var eventsSpouses = L.featureGroup.subGroup(allEvents);
-// var eventsChildren = L.featureGroup.subGroup(allEvents);
-// var eventsFriends = L.featureGroup.subGroup(allEvents);
-// var eventsOther = L.featureGroup.subGroup(allEvents);
-// // In-person / Hybrid
-// var eventsInPerson = L.markerClusterGroup(markerClusterOptions);
-// var eventsHybrid = L.featureGroup.subGroup(allEvents);
-
-// // Set up Layer Groups
-// // Categorical
-// var allEvents = L.markerClusterGroup(markerClusterOptions);
-// var eventsPets = L.markerClusterGroup(markerClusterOptions);
-// var eventsParents = L.markerClusterGroup(markerClusterOptions);
-// var eventsSpouses = L.markerClusterGroup(markerClusterOptions);
-// var eventsChildren = L.markerClusterGroup(markerClusterOptions);
-// var eventsFriends = L.markerClusterGroup(markerClusterOptions);
-// var eventsOther = L.markerClusterGroup(markerClusterOptions);
-// // In-person / Hybrid
-// var eventsInPerson = L.markerClusterGroup(markerClusterOptions);
-// var eventsHybrid = L.markerClusterGroup(markerClusterOptions);
-
 // Set up Layer Groups
 // Categorical
-var allEvents = L.layerGroup();
+// var allEvents = L.layerGroup();
 var eventsPets = L.layerGroup();
 var eventsParents = L.layerGroup();
 var eventsSpouses = L.layerGroup();
@@ -65,7 +41,7 @@ var layerSupport = new L.MarkerClusterGroup.LayerSupport();
 var map = L.map('map', {
   center: [44.6923, -62.6572],
   zoom: 7,
-  layers: allEvents,
+  // layers: allEvents,
   maxZoom: 24
 });
 
@@ -99,47 +75,6 @@ var customLayer = L.geoJson(null, {
       }
 
       return L.marker(latlng, {icon: GGIcon});
-    // var category = feature.properties.categories;
-    // var inperson_n_h = feature.properties.inperson_n_h;
-    // var radius = 8;
-
-    // var markerOptions = {
-    //   radius: radius,
-    //   color: 'darkgrey',
-    //   weight: 0.5,
-    //   fillColor: '#f00',
-    //   fillOpacity: 1
-    // };
-
-    // if (eventsInPerson.hasLayer(this)) {
-    //   radius = 8,
-    //   // markerOptions.fillColor = '#00f'; // Blue
-    //   markerOptions.fillOpacity= 0.3; // Transparent
-    // }
-    // if (eventsHybrid.hasLayer(this)) {
-    //   radius = 24,
-    //   // markerOptions.fillColor = '#800'; // Red
-    //   markerOptions.fillOpacity= 0.3; // Transparent
-    // }
-
-    // if (category == "Pets") {
-    //   markerOptions.fillColor = '#0f0'; // Green
-    // } else if (category == "Parents"){
-    //   markerOptions.fillColor = '#ff0'; // Yellow
-    // } else if (category == "Spouses / Significant Others"){
-    //   markerOptions.fillColor = '#f80'; // Orange
-    // } else if (category == "Children"){
-    //   markerOptions.fillColor = '#81a'; // Purple
-    // } else if (category == "Friends") {
-    //   markerOptions.fillColor = '#8bf'; // Light Blue
-    // } else if (category == "Other") {
-    //   markerOptions.fillColor = '#60f'; // Bluer purple
-    // }
-
-    // if (inperson_n_h == "h"){
-    //   markerOptions.className ='shadow';
-    // }
-    // return L.circleMarker(latlng, markerOptions);
     },
   onEachFeature: function(feature, layer) {
 
@@ -232,7 +167,7 @@ var customLayer = L.geoJson(null, {
     layer.bindPopup(popupContent);
   }
 
-    allEvents.addLayer(layer);
+    // allEvents.addLayer(layer);
 
     // Categories separation
     if (category == "Pets") {
@@ -258,7 +193,7 @@ var customLayer = L.geoJson(null, {
     }
 
     layerSupport.addTo(map);
-    layerSupport.checkIn(allEvents);
+    // layerSupport.checkIn(allEvents);
     layerSupport.checkIn(eventsPets);
     layerSupport.checkIn(eventsParents);
     layerSupport.checkIn(eventsSpouses);
@@ -267,6 +202,15 @@ var customLayer = L.geoJson(null, {
     layerSupport.checkIn(eventsOther);
     // layerSupport.checkIn(eventsInPerson);
     layerSupport.checkIn(eventsHybrid);
+
+      // map.addLayer(allEvents);
+      map.addLayer(eventsPets);
+      map.addLayer(eventsParents);
+      map.addLayer(eventsSpouses);
+      map.addLayer(eventsChildren);
+      map.addLayer(eventsFriends);
+      map.addLayer(eventsOther);
+      map.addLayer(eventsHybrid);
   }
 });
 
@@ -281,36 +225,7 @@ var runLayer = omnivore.csv('./test_data.csv', null, customLayer)
       "Stamen Watercolor": Stamen_Watercolor
     };
 
-    // petsCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#0f0'/></svg>";
-    // parentsCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#ff0'/></svg>";
-    // spousesCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#f80'/></svg>";
-    // childrenCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#81a'/></svg>";
-    // friendsCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#8bf'/></svg>";
-    // otherCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#60f'/></svg>";
     hybridCircle = "<svg class='shadow' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='white'/></svg>";
-
-    // var overlayMaps = {
-    //   "All Events": allEvents,
-    //   [petsCircle + "Pets"]: eventsPets,
-    //   [parentsCircle + "Parents"]: eventsParents,
-    //   [spousesCircle + "Spouses / Significant Others"]: eventsSpouses,
-    //   [childrenCircle + "Children"]: eventsChildren,
-    //   [friendsCircle + "Friends"]: eventsFriends,
-    //   [otherCircle + "Other"]: eventsOther,
-    //   "In-Person": eventsInPerson,
-    //   [hybridCircle + "Hybrid (Virtual Option)"]: eventsHybrid
-    // };
-
-    //     var overlayMaps = {
-    //   "All Events": allEvents,
-    //   "Pets": eventsPets,
-    //   "Parents": eventsParents,
-    //   "Spouses / Significant Others": eventsSpouses,
-    //   "Children": eventsChildren,
-    //   "Friends": eventsFriends,
-    //   "Other": eventsOther,
-    //   "Hybrid (Virtual Option)": eventsHybrid
-    // };
 
     var groupedOverlays = {
       "All Events": {
@@ -325,15 +240,28 @@ var runLayer = omnivore.csv('./test_data.csv', null, customLayer)
     }
 
     var options = {
-      //exclusiveGroups: [""],
+      // exclusiveGroups: ["Virtual"],
       groupCheckboxes: true
     };
 
     L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
     // var layerControl = L.control.layers(baseMaps, overlayMaps, {collapsed:true}).addTo(map);
-    // layerControl.addOverlay(allEvents, "All Events") // Add "All Events" layer to the control manually
-
-    // Find the input element for the "All Events" overlay and set its checked property to true
+    
+    const searchControl = L.esri.Geocoding.geosearch({
+      position: "topright",
+      placeholder: "Enter an address or place e.g. 1 York St",
+      useMapBounds: false,
+      providers: [
+        L.esri.Geocoding.arcgisOnlineProvider({
+          apikey: apiKey,
+          nearby: {
+            lat: -33.8688,
+            lng: 151.2093
+          }
+        })
+      ]
+    }).addTo(map);
+    //Find the input element for the "All Events" overlay and set its checked property to true
     var inputs = document.getElementsByClassName('leaflet-control-layers-overlays')[0].getElementsByTagName('input');
     for (var i = 0; i < inputs.length; i++) {
       var label = inputs[i].parentNode;
@@ -344,4 +272,3 @@ var runLayer = omnivore.csv('./test_data.csv', null, customLayer)
     }
 })
   .addTo(map);
-
