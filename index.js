@@ -182,7 +182,7 @@ var customLayer = L.geoJson(null, {
       Learn More...
       </button>
       <button class="buyTicketsBtn">
-      Buy Tickets
+      Reserve Your Spot
       </button>
       </div>
     </div>`
@@ -221,7 +221,7 @@ var customLayer = L.geoJson(null, {
     Learn More...
     </button>
     <button class="buyTicketsBtn">
-    Buy Tickets
+    Reserve Your Spot
     </button>
     </div>
   </div>`
