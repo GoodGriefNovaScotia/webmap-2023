@@ -42,6 +42,7 @@
     width: 100%;
     padding: 8px;
     border-radius: 4px;
+    display: flex;
   }
 
   .eventTheme {
@@ -79,7 +80,8 @@
     height: 250px;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    /* padding: 10px; */
+    margin-top: 10px;
   }
   
   img {
@@ -89,12 +91,15 @@
 
   .footer {
     margin-top: auto;
+    align-items: center;
+    justify-content: center;
   }
   
   .learnMoreBtn, .buyTicketsBtn {
     border: solid #4f4f59 1px;
     border-radius: 2px;
     color: #4f4f59;
+    margin: 4px;
   }
   
   .learnMoreBtn {
