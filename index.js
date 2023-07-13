@@ -56,7 +56,7 @@ var eventsChildren = L.layerGroup();
 var eventsFriends = L.layerGroup();
 var eventsOther = L.layerGroup();
 // In-person / Hybrid
-var eventsInPerson = L.layerGroup();
+// var eventsInPerson = L.layerGroup();
 var eventsHybrid = L.layerGroup();
 
 var layerSupport = new L.MarkerClusterGroup.LayerSupport();
@@ -76,19 +76,40 @@ var defaultBaseMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png
 })
 defaultBaseMap.addTo(map);
 
+
+var MarkerIcon = L.Icon.extend({
+  options: {
+    iconSize: [50, 50],
+    iconAnchor: [0, 0],
+    popupAnchor: [0,0]
+  }
+})
+
+var GGIcon = new MarkerIcon({iconUrl: 'GG-icon.png'});
+
+var virtualIcon = new MarkerIcon({iconUrl: 'GG-icon.png', className: 'shadow'});
+
 var customLayer = L.geoJson(null, {
     pointToLayer: function(feature, latlng){
-    var category = feature.properties.categories;
-    var inperson_n_h = feature.properties.inperson_n_h;
-    var radius = 8;
 
-    var markerOptions = {
-      radius: radius,
-      color: 'darkgrey',
-      weight: 0.5,
-      fillColor: '#f00',
-      fillOpacity: 1
-    };
+      var inperson_n_h = feature.properties.inperson_n_h;
+
+      if (inperson_n_h == "h"){
+        return L.marker(latlng, {icon: virtualIcon});
+      }
+
+      return L.marker(latlng, {icon: GGIcon});
+    // var category = feature.properties.categories;
+    // var inperson_n_h = feature.properties.inperson_n_h;
+    // var radius = 8;
+
+    // var markerOptions = {
+    //   radius: radius,
+    //   color: 'darkgrey',
+    //   weight: 0.5,
+    //   fillColor: '#f00',
+    //   fillOpacity: 1
+    // };
 
     // if (eventsInPerson.hasLayer(this)) {
     //   radius = 8,
@@ -101,24 +122,24 @@ var customLayer = L.geoJson(null, {
     //   markerOptions.fillOpacity= 0.3; // Transparent
     // }
 
-    if (category == "Pets") {
-      markerOptions.fillColor = '#0f0'; // Green
-    } else if (category == "Parents"){
-      markerOptions.fillColor = '#ff0'; // Yellow
-    } else if (category == "Spouses / Significant Others"){
-      markerOptions.fillColor = '#f80'; // Orange
-    } else if (category == "Children"){
-      markerOptions.fillColor = '#81a'; // Purple
-    } else if (category == "Friends") {
-      markerOptions.fillColor = '#8bf'; // Light Blue
-    } else if (category == "Other") {
-      markerOptions.fillColor = '#60f'; // Bluer purple
-    }
+    // if (category == "Pets") {
+    //   markerOptions.fillColor = '#0f0'; // Green
+    // } else if (category == "Parents"){
+    //   markerOptions.fillColor = '#ff0'; // Yellow
+    // } else if (category == "Spouses / Significant Others"){
+    //   markerOptions.fillColor = '#f80'; // Orange
+    // } else if (category == "Children"){
+    //   markerOptions.fillColor = '#81a'; // Purple
+    // } else if (category == "Friends") {
+    //   markerOptions.fillColor = '#8bf'; // Light Blue
+    // } else if (category == "Other") {
+    //   markerOptions.fillColor = '#60f'; // Bluer purple
+    // }
 
-    if (inperson_n_h == "h"){
-      markerOptions.className ='shadow';
-    }
-    return L.circleMarker(latlng, markerOptions);
+    // if (inperson_n_h == "h"){
+    //   markerOptions.className ='shadow';
+    // }
+    // return L.circleMarker(latlng, markerOptions);
     },
   onEachFeature: function(feature, layer) {
 
@@ -212,12 +233,10 @@ var customLayer = L.geoJson(null, {
   }
 
     allEvents.addLayer(layer);
-    // console.log("All points added to All Events layer.");
 
     // Categories separation
     if (category == "Pets") {
       eventsPets.addLayer(layer);
-      // console.log("Pet Events layer populated.");
     } else if (category == "Parents"){
       eventsParents.addLayer(layer);
     } else if (category == "Spouses / Significant Others"){
@@ -231,12 +250,11 @@ var customLayer = L.geoJson(null, {
     }
 
     // In-person / Hybrid separation
-    if (inperson_n_h == "n") {
-      eventsInPerson.addLayer(layer);
-      // console.log("In Person");
-    } else if (inperson_n_h == "h") {
+    // if (inperson_n_h == "n") {
+    //   eventsInPerson.addLayer(layer);
+    // } else 
+    if (inperson_n_h == "h") {
       eventsHybrid.addLayer(layer);
-      // console.log("Hybrid");
     }
 
     layerSupport.addTo(map);
@@ -247,7 +265,7 @@ var customLayer = L.geoJson(null, {
     layerSupport.checkIn(eventsChildren);
     layerSupport.checkIn(eventsFriends);
     layerSupport.checkIn(eventsOther);
-    layerSupport.checkIn(eventsInPerson);
+    // layerSupport.checkIn(eventsInPerson);
     layerSupport.checkIn(eventsHybrid);
   }
 });
@@ -263,27 +281,56 @@ var runLayer = omnivore.csv('./test_data.csv', null, customLayer)
       "Stamen Watercolor": Stamen_Watercolor
     };
 
-    petsCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#0f0'/></svg>";
-    parentsCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#ff0'/></svg>";
-    spousesCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#f80'/></svg>";
-    childrenCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#81a'/></svg>";
-    friendsCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#8bf'/></svg>";
-    otherCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#60f'/></svg>";
+    // petsCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#0f0'/></svg>";
+    // parentsCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#ff0'/></svg>";
+    // spousesCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#f80'/></svg>";
+    // childrenCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#81a'/></svg>";
+    // friendsCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#8bf'/></svg>";
+    // otherCircle = "<svg class='circle' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='#60f'/></svg>";
     hybridCircle = "<svg class='shadow' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='white'/></svg>";
 
-    var overlayMaps = {
-      "All Events": allEvents,
-      [petsCircle + "Pets"]: eventsPets,
-      [parentsCircle + "Parents"]: eventsParents,
-      [spousesCircle + "Spouses / Significant Others"]: eventsSpouses,
-      [childrenCircle + "Children"]: eventsChildren,
-      [friendsCircle + "Friends"]: eventsFriends,
-      [otherCircle + "Other"]: eventsOther,
-      "In-Person": eventsInPerson,
-      [hybridCircle + "Hybrid (Virtual Option)"]: eventsHybrid
+    // var overlayMaps = {
+    //   "All Events": allEvents,
+    //   [petsCircle + "Pets"]: eventsPets,
+    //   [parentsCircle + "Parents"]: eventsParents,
+    //   [spousesCircle + "Spouses / Significant Others"]: eventsSpouses,
+    //   [childrenCircle + "Children"]: eventsChildren,
+    //   [friendsCircle + "Friends"]: eventsFriends,
+    //   [otherCircle + "Other"]: eventsOther,
+    //   "In-Person": eventsInPerson,
+    //   [hybridCircle + "Hybrid (Virtual Option)"]: eventsHybrid
+    // };
+
+    //     var overlayMaps = {
+    //   "All Events": allEvents,
+    //   "Pets": eventsPets,
+    //   "Parents": eventsParents,
+    //   "Spouses / Significant Others": eventsSpouses,
+    //   "Children": eventsChildren,
+    //   "Friends": eventsFriends,
+    //   "Other": eventsOther,
+    //   "Hybrid (Virtual Option)": eventsHybrid
+    // };
+
+    var groupedOverlays = {
+      "All Events": {
+        "Pets": eventsPets,
+        "Parents": eventsParents,
+        "Spouses / Significant Others": eventsSpouses,
+        "Children": eventsChildren,
+        "Friends": eventsFriends,
+        "Other": eventsOther,
+        [hybridCircle + "Hybrid (Virtual Option)"]: eventsHybrid
+      }
+    }
+
+    var options = {
+      //exclusiveGroups: [""],
+      groupCheckboxes: true
     };
 
-    var layerControl = L.control.layers(baseMaps, overlayMaps, {collapsed:true}).addTo(map);
+    L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
+    // var layerControl = L.control.layers(baseMaps, overlayMaps, {collapsed:true}).addTo(map);
     // layerControl.addOverlay(allEvents, "All Events") // Add "All Events" layer to the control manually
 
     // Find the input element for the "All Events" overlay and set its checked property to true
