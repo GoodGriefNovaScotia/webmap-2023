@@ -96,7 +96,7 @@
   
   .learnMoreBtn, .buyTicketsBtn {
     border: solid #4f4f59 1px;
-    border-radius: 2px;
+    border-radius: 6px;
     color: #4f4f59;
     margin: 4px;
   }
@@ -104,6 +104,11 @@
   .learnMoreBtn {
     background-color: #e9eae3;
     color: #4f4f59;
+    /* padding: 12px 24px; */
+    /* text-align: center; */
+    /* text-decoration: none; */
+    /* display: inline-block; */
+    /* font-size: 14px; */
   }
   
   .buyTicketsBtn {
