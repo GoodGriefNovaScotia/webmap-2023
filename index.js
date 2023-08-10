@@ -33,7 +33,7 @@ var markerClusterOptions = {
 //  var eventsOther = L.featureGroup.subGroup(layerSupport);
  // In-person / Hybrid
  //var eventsInPerson = L.markerClusterGroup(markerClusterOptions);
- var eventsHybrid = L.featureGroup.subGroup(layerSupport);
+//  var eventsHybrid = L.featureGroup.subGroup(layerSupport);
 
 // // Set up Layer Groups
 // // Categorical
@@ -46,7 +46,7 @@ var markerClusterOptions = {
 // var eventsOther = L.layerGroup();
 // // In-person / Hybrid
 // // var eventsInPerson = L.layerGroup();
-// var eventsHybrid = L.layerGroup();
+var eventsHybrid = L.layerGroup();
 
 var layerSupport = new L.MarkerClusterGroup.LayerSupport(markerClusterOptions);
 
@@ -268,7 +268,7 @@ var customLayer = L.geoJson(null, {
       // map.addLayer(eventsChildren);
       // map.addLayer(eventsFriends);
       // map.addLayer(eventsOther);
-       map.addLayer(eventsHybrid);
+      map.addLayer(eventsHybrid);
   }
 });
 
