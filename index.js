@@ -268,14 +268,14 @@ var customLayer = L.geoJson(null, {
       // map.addLayer(eventsChildren);
       // map.addLayer(eventsFriends);
       // map.addLayer(eventsOther);
-      map.addLayer(eventsHybrid);
+       map.addLayer(eventsHybrid);
   }
 });
 
 var runLayer = omnivore.csv('./responses.csv', null, customLayer)
   .on('ready', function() {
 
-    map.fitBounds(runLayer.getBounds());
+    map.fitBounds(runLayer.getBounds(), {padding: [50, 50]});
 
     var baseMaps = {
       "Default (OpenStreetMap)": defaultBaseMap,
@@ -306,7 +306,7 @@ var runLayer = omnivore.csv('./responses.csv', null, customLayer)
     // var layerControl = L.control.layers(baseMaps, overlayMaps, {collapsed:true}).addTo(map);
     
     const searchControl = L.esri.Geocoding.geosearch({
-      position: "topright",
+      position: "topleft",
       placeholder: "Enter an address or place e.g. 1 York St",
       useMapBounds: false,
       providers: [
