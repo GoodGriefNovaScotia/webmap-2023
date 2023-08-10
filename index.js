@@ -225,6 +225,13 @@ var customLayer = L.geoJson(null, {
     layer.bindPopup(popupContent);
   }
 
+  layer.on('mouseover', function (e) {
+    this.openPopup();
+  });
+  // layer.on('mouseout', function (e) {
+  //     this.closePopup();
+  // });
+
     // allEvents.addLayer(layer);
 
     // Categories separation
