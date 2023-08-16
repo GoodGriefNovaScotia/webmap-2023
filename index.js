@@ -109,7 +109,7 @@ var customLayer = L.geoJson(null, {
         </div>
         </div>
       <div class="photo">
-        <img src='https://images.squarespace-cdn.com/content/v1/64513cfe109e8268a6a4d0fc/1686702891197-5I10H5UT5BKV0D6SBNSP/nataliia-kvitovska-ah9muNXpCP0-unsplash+%281%29.jpg?format=1500w'>
+        <img src='header_square.jpg'>
       </div>
       <div class="table-layout">
       <table>
@@ -144,7 +144,7 @@ var customLayer = L.geoJson(null, {
         </div>
         </div>
       <div class="photo">
-        <img src='https://images.squarespace-cdn.com/content/v1/64513cfe109e8268a6a4d0fc/1686702891197-5I10H5UT5BKV0D6SBNSP/nataliia-kvitovska-ah9muNXpCP0-unsplash+%281%29.jpg?format=1500w'>
+        <img src='header_square.jpg'>
       </div>
       <div class="table-layout">
       <table>
@@ -187,7 +187,7 @@ var customLayer = L.geoJson(null, {
     </div>
   </div>
     <div class="photo">
-      <img src='https://images.squarespace-cdn.com/content/v1/64513cfe109e8268a6a4d0fc/1686702891197-5I10H5UT5BKV0D6SBNSP/nataliia-kvitovska-ah9muNXpCP0-unsplash+%281%29.jpg?format=1500w'>
+      <img src='header_square.jpg'>
     </div>
     <div class="table-layout">
     <table>
