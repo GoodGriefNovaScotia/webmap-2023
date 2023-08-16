@@ -8,6 +8,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%;
   }
 
   .header {
@@ -48,10 +49,12 @@
   .eventTheme {
     font-family: 'Brittany Signature';
     font-size: 14pt;
+    margin-top: 6px;
   }
 
   .table-layout {
-    width: 100%
+    width: 100%;
+    margin: 10px;
   }
   
   table {
@@ -60,7 +63,7 @@
     border: dashed #4f4f59 1px;
     border-radius: 4px;
     padding: 4px;
-    margin: 8px;
+    width: 100%;
   }
   
   th {
@@ -99,6 +102,7 @@
     border-radius: 6px;
     color: #4f4f59;
     margin: 4px;
+    margin-bottom: 8px;
   }
   
   .learnMoreBtn {
