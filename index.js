@@ -22,30 +22,9 @@ var markerClusterOptions = {
   zoomToBoundsOnClick: true
 };
 
-// Set up Layer Groups
- // Categorical
-//  var allEvents = L.featureGroup.subGroup(layerSupport);
-//  var eventsPets = L.featureGroup.subGroup(layerSupport);
-//  var eventsParents = L.featureGroup.subGroup(layerSupport);
-//  var eventsSpouses = L.featureGroup.subGroup(layerSupport);
-//  var eventsChildren = L.featureGroup.subGroup(layerSupport);
-//  var eventsFriends = L.featureGroup.subGroup(layerSupport);
-//  var eventsOther = L.featureGroup.subGroup(layerSupport);
- // In-person / Hybrid
- //var eventsInPerson = L.markerClusterGroup(markerClusterOptions);
-//  var eventsHybrid = L.featureGroup.subGroup(layerSupport);
-
 // // Set up Layer Groups
 // // Categorical
-// // var allEvents = L.layerGroup();
-// var eventsPets = L.layerGroup();
-// var eventsParents = L.layerGroup();
-// var eventsSpouses = L.layerGroup();
-// var eventsChildren = L.layerGroup();
-// var eventsFriends = L.layerGroup();
-// var eventsOther = L.layerGroup();
-// // In-person / Hybrid
-// // var eventsInPerson = L.layerGroup();
+var allEvents = L.layerGroup();
 var eventsHybrid = L.layerGroup();
 
 var layerSupport = new L.MarkerClusterGroup.LayerSupport(markerClusterOptions);
@@ -229,33 +208,17 @@ var customLayer = L.geoJson(null, {
     this.openPopup();
   });
 
-    // allEvents.addLayer(layer);
+    allEvents.addLayer(layer);
 
     // Categories separation
-    // if (category == "Pets") {
-    //   eventsPets.addLayer(layer);
-    // } else if (category == "Parents"){
-    //   eventsParents.addLayer(layer);
-    // } else if (category == "Spouses / Significant Others"){
-    //   eventsSpouses.addLayer(layer);
-    // } else if (category == "Children"){
-    //   eventsChildren.addLayer(layer);
-    // } else if (category == "Friends") {
-    //   eventsFriends.addLayer(layer);
-    // } else if (category == "Other") {
-    //   eventsOther.addLayer(layer);
-    // }
 
     // In-person / Hybrid separation
-    // if (inperson_n_h == "n") {
-    //   eventsInPerson.addLayer(layer);
-    // } else 
     if (inperson_n_h == "Both in-person and virtual") {
       eventsHybrid.addLayer(layer);
     }
 
     layerSupport.addTo(map);
-    // layerSupport.checkIn(allEvents);
+    layerSupport.checkIn(allEvents);
     // // layerSupport.checkIn(eventsPets);
     // // layerSupport.checkIn(eventsParents);
     // // layerSupport.checkIn(eventsSpouses);
@@ -265,7 +228,7 @@ var customLayer = L.geoJson(null, {
     // // layerSupport.checkIn(eventsInPerson);
     layerSupport.checkIn(eventsHybrid);
 
-      // map.addLayer(allEvents);
+      map.addLayer(allEvents);
       // map.addLayer(eventsPets);
       // map.addLayer(eventsParents);
       // map.addLayer(eventsSpouses);
@@ -290,24 +253,17 @@ var runLayer = omnivore.csv('./responses.csv', null, customLayer)
     hybridCircle = "<svg class='shadow' width='10' height='10'> <circle cx='5' cy='5' r='4' stroke-width='0.5' stroke='darkgrey' fill='white'/></svg>";
 
     var groupedOverlays = {
-      "All Events": {
-        // "Pets": eventsPets,
-        // "Parents": eventsParents,
-        // "Spouses / Significant Others": eventsSpouses,
-        // "Children": eventsChildren,
-        // "Friends": eventsFriends,
-        // "Other": eventsOther,
+      "Events": {
+        "All Events": allEvents,
         [hybridCircle + "Hybrid (Virtual Option)"]: eventsHybrid
       }
     }
 
     var options = {
-      // exclusiveGroups: ["Virtual"],
       groupCheckboxes: true
     };
 
     L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
-    // var layerControl = L.control.layers(baseMaps, overlayMaps, {collapsed:true}).addTo(map);
     
     const searchControl = L.esri.Geocoding.geosearch({
       position: "topleft",
@@ -323,11 +279,12 @@ var runLayer = omnivore.csv('./responses.csv', null, customLayer)
         })
       ]
     }).addTo(map);
+    
     //Find the input element for the "All Events" overlay and set its checked property to true
     var inputs = document.getElementsByClassName('leaflet-control-layers-overlays')[0].getElementsByTagName('input');
     for (var i = 0; i < inputs.length; i++) {
       var label = inputs[i].parentNode;
-      if (label.textContent.trim() === 'All Events') {
+      if (label.textContent.trim() === 'Events') {
         inputs[i].checked = true;
         break;
       }
