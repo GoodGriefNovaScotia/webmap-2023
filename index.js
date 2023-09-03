@@ -18,14 +18,17 @@ var Stamen_Watercolor = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/w
 
 var markerClusterOptions = {
   spiderfyOnMaxZoom: true,
-  showCoverageOnHover: false,
-  zoomToBoundsOnClick: true
+  showCoverageOnHover: true,
+  zoomToBoundsOnClick: true,
+  // spiderLegPolylineOptions: list(weight = 1.5, color = "#222", opacity = 0.5),
+  freezeAtZoom: false
 };
 
 // // Set up Layer Groups
 // // Categorical
 var allEvents = L.layerGroup();
 var eventsHybrid = L.layerGroup();
+var eventsVirtual = L.layerGroup();
 
 var layerSupport = new L.MarkerClusterGroup.LayerSupport(markerClusterOptions);
 
@@ -34,7 +37,9 @@ var map = L.map('map', {
   center: [44.6923, -62.6572],
   zoom: 7,
   // layers: allEvents,
-  maxZoom: 24
+  maxZoom: 24,
+  autoPan: false,
+  zoomControl: false
 });
 
 // Default Base Map
@@ -62,7 +67,7 @@ var customLayer = L.geoJson(null, {
 
       var inperson_n_h = feature.properties.inperson_n_h;
 
-      if (inperson_n_h == "Both in-person and virtual"){
+      if (inperson_n_h != "In-person"){
         return L.marker(latlng, {icon: virtualIcon});
       }
 
@@ -152,6 +157,7 @@ var customLayer = L.geoJson(null, {
       <button class="buyTicketsBtn">
       Reserve Your Spot
       </button>
+      </form>
       </div>
     </div>`
     //Hybrid pop-up
@@ -176,7 +182,7 @@ var customLayer = L.geoJson(null, {
       </tr>
       <tr>
         <th>Event Organizer:</th>
-        <td>Organizer #` + feature.properties.organization + `</td>
+        <td>` + feature.properties.organization + `</td>
       </tr>
       <tr>
         <th>Event Location:</th>
@@ -185,16 +191,178 @@ var customLayer = L.geoJson(null, {
     </table>
     </div>
     <div class="footer">
+    <form action="`+ feature.properties.event_link + `">
     <button class="learnMoreBtn">
     Learn More...
+    </button>
+    <form action="` + feature.properties.reg_link + `">
     </button>
     <button class="buyTicketsBtn">
     Reserve Your Spot
     </button>
+    </form>
     </div>
   </div>`
-	  
-  if (inperson_n_h == "Both in-person and virtual") {
+  var virtualPopupContent = `<div class="wrapper">
+  <div class="header">
+  <div class="eventName">
+  ` + feature.properties.event_name + `<br>
+  <span class="eventTheme">` + feature.properties.public_y_n + `</span>
+  </div>
+</div>
+  <div class="photo">
+    <img src='header_square.jpg'>
+  </div>
+  <div class="table-layout">
+  <table>
+    <tr>
+      <th>Event Date:</th>
+      <td>`+ feature.properties.date + `</td>
+    </tr>
+    <tr>
+      <th>Event Organizer:</th>
+      <td>` + feature.properties.organization + `</td>
+    </tr>
+    <tr>
+      <th>Event Location:</th>
+      <td>Virtual</td>
+    </tr>
+  </table>
+  </div>
+  <div class="footer">
+  <form action="`+ feature.properties.event_link + `">
+  <button class="learnMoreBtn">
+  Learn More...
+  <form action="` + feature.properties.reg_link + `">
+  </button>
+  <button class="buyTicketsBtn">
+  Reserve Your Spot
+  </button>
+  </form>
+  </div>
+</div>`
+var virtualPopupContentNoReg = `<div class="wrapper">
+<div class="header">
+<div class="eventName">
+` + feature.properties.event_name + `<br>
+<span class="eventTheme">` + feature.properties.public_y_n + `</span>
+</div>
+</div>
+<div class="photo">
+  <img src='header_square.jpg'>
+</div>
+<div class="table-layout">
+<table>
+  <tr>
+    <th>Event Date:</th>
+    <td>`+ feature.properties.date + `</td>
+  </tr>
+  <tr>
+    <th>Event Organizer:</th>
+    <td>` + feature.properties.organization + `</td>
+  </tr>
+  <tr>
+    <th>Event Location:</th>
+    <td>Virtual</td>
+  </tr>
+</table>
+</div>
+<div class="footer">
+<form action="`+ feature.properties.event_link + `">
+<button class="learnMoreBtn">
+Learn More...
+</button>
+</div>
+</div>`
+  
+
+  // function createPopUpContent(attributes, template){
+  //   let content = document.createElement('div');
+  //   content.innerHTML = template;
+
+  //   if (inperson_n_h == "Both in-person and virtual"){
+  //     const virtualContainer = content.querySelector('#virtual');
+  //     virtualContainer.classList.remove('hidden');
+  //   }
+  //   if (attributes.photo != "") {
+  //     const photoContainer = content.querySelector('#photo');
+  //     photoContainer.innerHTML = `<img src ="${attributes.photo}" alt="Custom Photo">`;
+  //   }
+  //   if (attributes.photo == "") {
+  //     const photoContainer = content.querySelector('#photo');
+  //     photoContainer.innerHTML = `<img src ="header_square.jpg" alt="Default Photo">`;
+  //   }
+  //   if (link_reg != ""){
+  //     const virtualContainer = content.querySelector('#virtual');
+  //     virtualContainer.classList.remove('hidden');
+  //   }
+  //   return content.innerHTML;
+  // }
+  // const popupTemplate = document.getElementById('popup-template').innerHTML;
+
+  
+  // Custom animation to make the popup appear slowly
+  // var customAnimation = function (popup, pos, options) {
+  //   var start = performance.now();
+  //   var duration = 3000; // Adjust the duration as needed (3 seconds in this example)
+
+  //   function animatePopup(timestamp) {
+  //     var progress = (timestamp - start) / duration;
+
+  //     if (progress < 1) {
+  //       L.Util.requestAnimFrame(animatePopup);
+  //       popup._wrapper.style.opacity = progress;
+  //     } else {
+  //       popup._wrapper.style.opacity = 1;
+  //     }
+  //   }
+
+  //   animatePopup(start);
+  // };
+
+  // var isPopupManuallyClosed = false;
+
+  function openPopupAndCenterMap(layer) {
+    if (!layer._popup || layer._popup.isOpen()) {
+      return;
+    }
+  
+    // Get the target LatLng for the popup
+    var targetLatLng = layer.getLatLng();
+  
+    if (!map.getBounds().contains(targetLatLng)) {
+    // Animate the map to the popup location with easing
+    map.panTo(targetLatLng, {
+      duration: 1, // Set the duration of the animation (in seconds)
+      easeLinearity: 0.25, // Adjust this value for custom easing
+    });
+    }
+    // Open the popup after the map has panned
+    setTimeout(function () {
+      // if (!isPopupManuallyClosed) {
+      layer.openPopup();
+      // }
+    }, 500); // Adjust the delay as needed (3 seconds in this example)
+  }
+
+  function closePopupWithDelay(layer) {
+    // Close the popup after a delay
+    setTimeout(function () {
+      if (layer._popup && layer._popup.isOpen()) {
+        layer.closePopup();
+      }
+    }, 3000); // Adjust the delay as needed (3 seconds in this example)
+  }
+
+  // {autoClose: false, keepInView: true, openAnimation: customAnimation}
+
+  if (feature.properties.full_address == "" && link_reg != ""){
+    layer.bindPopup(virtualPopupContent);
+  }  
+  else if (feature.properties.full_address == "" && link_reg == ""){
+    layer.bindPopup(virtualPopupContentNoReg);
+  }  
+  else if (inperson_n_h == "Both in-person and virtual") {
     layer.bindPopup(hybridPopupContent);
   } 
   else if (link_reg != ""){
@@ -204,8 +372,40 @@ var customLayer = L.geoJson(null, {
     layer.bindPopup(popupContent);
   }
 
+  // layer.bindPopup(createPopUpContent(feature, popupTemplate));
+
+  // var isPopupOpen = false;
+
+  // layer.on('mouseover', function (e) {
+
+  //   if (!isPopupOpen) {
+  //     this.openPopup();
+  //     isPopupOpen = true;
+  //     // Get the target LatLng for the popup
+  //     var targetLatLng = this.getLatLng();
+  //     // Animate the map to the popup location with easing
+  //     map.panTo(targetLatLng, {
+  //     duration: 10, // Set the duration of the animation (in seconds)
+  //     easeLinearity: 0.25, // Adjust this value for custom easing
+  //     noMoveStart: true // Prevent the map from moving before the animation starts
+  //     });
+  //   }
+  // });
+
+  // layer.on('mouseout', function (e) {
+  //   var popup = this;
+  //   setTimeout(function () {
+  //     popup.closePopup();
+  //     isPopupOpen = false;
+  //   }, 3000);
+  // });
+
   layer.on('mouseover', function (e) {
-    this.openPopup();
+    openPopupAndCenterMap(layer);
+  });
+
+  layer.on('mouseout', function (e) {
+    closePopupWithDelay(layer);
   });
 
     allEvents.addLayer(layer);
@@ -216,33 +416,26 @@ var customLayer = L.geoJson(null, {
     if (inperson_n_h == "Both in-person and virtual") {
       eventsHybrid.addLayer(layer);
     }
+    else if (inperson_n_h != "In-person") {
+      eventsVirtual.addLayer(layer);
+    }
 
     layerSupport.addTo(map);
     layerSupport.checkIn(allEvents);
-    // // layerSupport.checkIn(eventsPets);
-    // // layerSupport.checkIn(eventsParents);
-    // // layerSupport.checkIn(eventsSpouses);
-    // // layerSupport.checkIn(eventsChildren);
-    // // layerSupport.checkIn(eventsFriends);
-    // // layerSupport.checkIn(eventsOther);
-    // // layerSupport.checkIn(eventsInPerson);
+    layerSupport.checkIn(eventsVirtual)
+
     layerSupport.checkIn(eventsHybrid);
 
       map.addLayer(allEvents);
-      // map.addLayer(eventsPets);
-      // map.addLayer(eventsParents);
-      // map.addLayer(eventsSpouses);
-      // map.addLayer(eventsChildren);
-      // map.addLayer(eventsFriends);
-      // map.addLayer(eventsOther);
-      map.addLayer(eventsHybrid);
+      // map.addLayer(eventsHybrid);
+      // map.addLayer(eventsVirtual);
   }
 });
 
 var runLayer = omnivore.csv('./responses.csv', null, customLayer)
   .on('ready', function() {
 
-    map.fitBounds(runLayer.getBounds(), {padding: [50, 50]});
+    // map.fitBounds(runLayer.getBounds(), {padding: [50, 50]});
 
     var baseMaps = {
       "Default (OpenStreetMap)": defaultBaseMap,
@@ -255,16 +448,110 @@ var runLayer = omnivore.csv('./responses.csv', null, customLayer)
     var groupedOverlays = {
       "Events": {
         "All Events": allEvents,
-        [hybridCircle + "Hybrid (Virtual Option)"]: eventsHybrid
+        [hybridCircle + "Virtual / Virtual Option"]: eventsVirtual
       }
     }
 
     var options = {
-      groupCheckboxes: true
+      groupCheckboxes: false
     };
 
     L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
     
+    // custom zoom bar control that includes a Zoom Home function
+L.Control.zoomHome = L.Control.extend({
+  options: {
+      position: 'topleft',
+      zoomInText: '+',
+      zoomInTitle: 'Zoom in',
+      zoomOutText: '-',
+      zoomOutTitle: 'Zoom out',
+      zoomHomeText: '<i class="fa fa-home" style="line-height:1.65;"></i>',
+      zoomHomeTitle: 'Zoom home'
+  },
+
+  onAdd: function (map) {
+      var controlName = 'gin-control-zoom',
+          container = L.DomUtil.create('div', controlName + ' leaflet-bar'),
+          options = this.options;
+
+      this._zoomInButton = this._createButton(options.zoomInText, options.zoomInTitle,
+      controlName + '-in', container, this._zoomIn);
+      this._zoomHomeButton = this._createButton(options.zoomHomeText, options.zoomHomeTitle,
+      controlName + '-home', container, this._zoomHome);
+      this._zoomOutButton = this._createButton(options.zoomOutText, options.zoomOutTitle,
+      controlName + '-out', container, this._zoomOut);
+
+      this._updateDisabled();
+      map.on('zoomend zoomlevelschange', this._updateDisabled, this);
+
+      return container;
+  },
+
+  onRemove: function (map) {
+      map.off('zoomend zoomlevelschange', this._updateDisabled, this);
+  },
+
+  _zoomIn: function (e) {
+      this._map.zoomIn(e.shiftKey ? 3 : 1);
+  },
+
+  _zoomOut: function (e) {
+      this._map.zoomOut(e.shiftKey ? 3 : 1);
+  },
+
+  _zoomHome: function (e) {
+      map.setView([44.6923, -62.6572], 7);
+  },
+
+  _createButton: function (html, title, className, container, fn) {
+      var link = L.DomUtil.create('a', className, container);
+      link.innerHTML = html;
+      link.href = '#';
+      link.title = title;
+
+      L.DomEvent.on(link, 'mousedown dblclick', L.DomEvent.stopPropagation)
+          .on(link, 'click', L.DomEvent.stop)
+          .on(link, 'click', fn, this)
+          .on(link, 'click', this._refocusOnMap, this);
+
+      return link;
+  },
+
+  _updateDisabled: function () {
+      var map = this._map,
+          className = 'leaflet-disabled';
+
+      L.DomUtil.removeClass(this._zoomInButton, className);
+      L.DomUtil.removeClass(this._zoomOutButton, className);
+
+      if (map._zoom === map.getMinZoom()) {
+          L.DomUtil.addClass(this._zoomOutButton, className);
+      }
+      if (map._zoom === map.getMaxZoom()) {
+          L.DomUtil.addClass(this._zoomInButton, className);
+      }
+  }
+});
+// add the new control to the map
+var zoomHome = new L.Control.zoomHome();
+zoomHome.addTo(map);
+    
+    
+    
+    var circleCenter = [43.995880760718585, -62.365874593318644]
+
+    var circleOptions = {
+      color: 'blue',
+      fillColor: 'blue',
+      fillOpacity: 0.3
+   }
+
+   var circle = L.circle(circleCenter, 50000, circleOptions).bindTooltip("Virtual Events", {direction: "center", permanent: true, offset: [0, -50] });
+   ;
+
+   circle.addTo(map);
+
     const searchControl = L.esri.Geocoding.geosearch({
       position: "topleft",
       placeholder: "Enter an address or place e.g. 1 York St",
@@ -289,6 +576,23 @@ var runLayer = omnivore.csv('./responses.csv', null, customLayer)
         break;
       }
     }
+
+    // var extentControl = L.Control.extend({
+    //   options: {
+    //       position: 'bottomleft'
+    //   },
+    //   onAdd: function (map) {
+    //       var llBounds = map.getBounds();
+    //       var container = L.DomUtil.create('div', 'extentControl');
+    //       $(container).css('background', 'url(i/extent.png) no-repeat 50% 50%').css('width', '26px').css('height', '26px').css('outline', '1px black');
+    //       $(container).on('click', function () {
+    //           map.fitBounds(llBounds);
+    //       });
+    //       return container;
+    //      }
+    //   })
+      
+    //   map.addControl(new extentControl());
 })
   .addTo(map);
 
