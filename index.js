@@ -333,7 +333,7 @@ Learn More...
     if (!map.getBounds().contains(targetLatLng)) {
     // Animate the map to the popup location with easing
     map.panTo(targetLatLng, {
-      duration: 1, // Set the duration of the animation (in seconds)
+      duration: 10, // Set the duration of the animation (in seconds)
       easeLinearity: 0.25, // Adjust this value for custom easing
     });
     }
