@@ -37,11 +37,54 @@
         <link href='https://fonts.googleapis.com/css?family=Roboto Slab' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
         <link href="https://fonts.cdnfonts.com/css/brittany-signature" rel="stylesheet">
+        <!--Home button-->
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     </head>
 <body>
     <div id="map"></div>
     <script src="index.js"></script>
     <script src="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.umd.js"></script>
 
+    <!-- <div id="popup-template" class="hidden">
+    <div class="wrapper">
+        <div class="header">
+        <div id="virtual" style="display: none;">
+        Virtual Option Available!
+        </div>
+        <div class="eventName">
+        ` + feature.properties.event_name + `<br>
+        <span class="eventTheme">` + feature.properties.public_y_n + `</span>
+        </div>
+        </div>
+        <div id="photo">
+            <img src='header_square.jpg'>
+            %PHOTO%
+        </div>
+        <div class="table-layout">
+        <table>
+            <tr>
+            <th>Event Date:</th>
+            <td>`+ feature.properties.date + `</td>
+            </tr>
+            <tr>
+            <th>Event Organizer:</th>
+            <td>Organizer #` + feature.properties.organization + `</td>
+            </tr>
+            <tr>
+            <th>Event Location:</th>
+            <td>` + eventLocation + `</td>
+            </tr>
+        </table>
+        </div>
+        <div class="footer">
+        <button class="learnMoreBtn">
+        Learn More...
+        </button>
+        <button id="buyTickets" class="buyTicketsBtn hidden">
+        Reserve Your Spot
+        </button>
+        </div>
+    </div>
+    </div> -->
 </body>
 </html>
