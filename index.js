@@ -300,61 +300,18 @@ Learn More...
   // }
   // const popupTemplate = document.getElementById('popup-template').innerHTML;
 
-  
-  // Custom animation to make the popup appear slowly
-  // var customAnimation = function (popup, pos, options) {
-  //   var start = performance.now();
-  //   var duration = 3000; // Adjust the duration as needed (3 seconds in this example)
-
-  //   function animatePopup(timestamp) {
-  //     var progress = (timestamp - start) / duration;
-
-  //     if (progress < 1) {
-  //       L.Util.requestAnimFrame(animatePopup);
-  //       popup._wrapper.style.opacity = progress;
-  //     } else {
-  //       popup._wrapper.style.opacity = 1;
-  //     }
-  //   }
-
-  //   animatePopup(start);
-  // };
-
-  // var isPopupManuallyClosed = false;
-
   function openPopupAndCenterMap(layer) {
-    if (!layer._popup || layer._popup.isOpen()) {
-      return;
-    }
-  
+
     // Get the target LatLng for the popup
     var targetLatLng = layer.getLatLng();
   
-    if (!map.getBounds().contains(targetLatLng)) {
-    // Animate the map to the popup location with easing
-    map.panTo(targetLatLng, {
-      duration: 10, // Set the duration of the animation (in seconds)
-      easeLinearity: 0.25, // Adjust this value for custom easing
-    });
-    }
     // Open the popup after the map has panned
     setTimeout(function () {
       // if (!isPopupManuallyClosed) {
       layer.openPopup();
       // }
-    }, 500); // Adjust the delay as needed (3 seconds in this example)
+    }, 300); // Adjust the delay as needed (3 seconds in this example)
   }
-
-  function closePopupWithDelay(layer) {
-    // Close the popup after a delay
-    setTimeout(function () {
-      if (layer._popup && layer._popup.isOpen()) {
-        layer.closePopup();
-      }
-    }, 3000); // Adjust the delay as needed (3 seconds in this example)
-  }
-
-  // {autoClose: false, keepInView: true, openAnimation: customAnimation}
 
   if (feature.properties.full_address == "" && link_reg != ""){
     layer.bindPopup(virtualPopupContent);
@@ -374,38 +331,8 @@ Learn More...
 
   // layer.bindPopup(createPopUpContent(feature, popupTemplate));
 
-  // var isPopupOpen = false;
-
-  // layer.on('mouseover', function (e) {
-
-  //   if (!isPopupOpen) {
-  //     this.openPopup();
-  //     isPopupOpen = true;
-  //     // Get the target LatLng for the popup
-  //     var targetLatLng = this.getLatLng();
-  //     // Animate the map to the popup location with easing
-  //     map.panTo(targetLatLng, {
-  //     duration: 10, // Set the duration of the animation (in seconds)
-  //     easeLinearity: 0.25, // Adjust this value for custom easing
-  //     noMoveStart: true // Prevent the map from moving before the animation starts
-  //     });
-  //   }
-  // });
-
-  // layer.on('mouseout', function (e) {
-  //   var popup = this;
-  //   setTimeout(function () {
-  //     popup.closePopup();
-  //     isPopupOpen = false;
-  //   }, 3000);
-  // });
-
   layer.on('mouseover', function (e) {
     openPopupAndCenterMap(layer);
-  });
-
-  layer.on('mouseout', function (e) {
-    closePopupWithDelay(layer);
   });
 
     allEvents.addLayer(layer);
@@ -427,15 +354,11 @@ Learn More...
     layerSupport.checkIn(eventsHybrid);
 
       map.addLayer(allEvents);
-      // map.addLayer(eventsHybrid);
-      // map.addLayer(eventsVirtual);
   }
 });
 
 var runLayer = omnivore.csv('./responses.csv', null, customLayer)
   .on('ready', function() {
-
-    // map.fitBounds(runLayer.getBounds(), {padding: [50, 50]});
 
     var baseMaps = {
       "Default (OpenStreetMap)": defaultBaseMap,
