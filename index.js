@@ -102,10 +102,6 @@ var customLayer = L.geoJson(null, {
           <td>`+ feature.properties.date + `</td>
         </tr>
         <tr>
-          <th>Event Organizer:</th>
-          <td>` + feature.properties.organization + `</td>
-        </tr>
-        <tr>
           <th>Event Location:</th>
           <td>` + eventLocation + `</td>
         </tr>
@@ -135,10 +131,6 @@ var customLayer = L.geoJson(null, {
         <tr>
           <th>Event Date:</th>
           <td>`+ feature.properties.date + `</td>
-        </tr>
-        <tr>
-          <th>Event Organizer:</th>
-          <td>` + feature.properties.organization + `</td>
         </tr>
         <tr>
           <th>Event Location:</th>
@@ -181,10 +173,6 @@ var customLayer = L.geoJson(null, {
         <td>`+ feature.properties.date + `</td>
       </tr>
       <tr>
-        <th>Event Organizer:</th>
-        <td>` + feature.properties.organization + `</td>
-      </tr>
-      <tr>
         <th>Event Location:</th>
         <td>` + eventLocation + `</td>
       </tr>
@@ -220,10 +208,6 @@ var customLayer = L.geoJson(null, {
       <td>`+ feature.properties.date + `</td>
     </tr>
     <tr>
-      <th>Event Organizer:</th>
-      <td>` + feature.properties.organization + `</td>
-    </tr>
-    <tr>
       <th>Event Location:</th>
       <td>Virtual</td>
     </tr>
@@ -256,10 +240,6 @@ var virtualPopupContentNoReg = `<div class="wrapper">
   <tr>
     <th>Event Date:</th>
     <td>`+ feature.properties.date + `</td>
-  </tr>
-  <tr>
-    <th>Event Organizer:</th>
-    <td>` + feature.properties.organization + `</td>
   </tr>
   <tr>
     <th>Event Location:</th>
