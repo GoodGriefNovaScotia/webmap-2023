@@ -86,8 +86,8 @@ html, body, #map {
   
   .photo {
     display: flex;
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     align-items: center;
     justify-content: center;
     margin-top: 10px;
