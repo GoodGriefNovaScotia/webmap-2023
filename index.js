@@ -21,7 +21,8 @@ var markerClusterOptions = {
   showCoverageOnHover: true,
   zoomToBoundsOnClick: true,
   // spiderLegPolylineOptions: list(weight = 1.5, color = "#222", opacity = 0.5),
-  freezeAtZoom: false
+  freezeAtZoom: false,
+  removeOutsideVisibleBounds: false
 };
 
 // // Set up Layer Groups
