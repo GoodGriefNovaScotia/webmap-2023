@@ -296,19 +296,19 @@ Learn More...
   }
 
   if (feature.properties.full_address == "" && link_reg != ""){
-    layer.bindPopup(virtualPopupContent);
+    layer.bindPopup(virtualPopupContent, {keepInView: true});
   }  
   else if (feature.properties.full_address == "" && link_reg == ""){
-    layer.bindPopup(virtualPopupContentNoReg);
+    layer.bindPopup(virtualPopupContentNoReg, {keepInView: true});
   }  
   else if (inperson_n_h == "Both in-person and virtual") {
-    layer.bindPopup(hybridPopupContent);
+    layer.bindPopup(hybridPopupContent, {keepInView: true});
   } 
   else if (link_reg != ""){
-    layer.bindPopup(popupContentReg);
+    layer.bindPopup(popupContentReg, {keepInView: true});
   }  
   else {
-    layer.bindPopup(popupContent);
+    layer.bindPopup(popupContent, {keepInView: true});
   }
 
   // layer.bindPopup(createPopUpContent(feature, popupTemplate));
