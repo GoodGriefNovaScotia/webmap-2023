@@ -39,7 +39,8 @@ var map = L.map('map', {
   // layers: allEvents,
   maxZoom: 24,
   autoPan: false,
-  zoomControl: false
+  zoomControl: false,
+  tap: false
 });
 
 // Default Base Map
