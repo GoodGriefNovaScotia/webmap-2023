@@ -110,7 +110,7 @@ var customLayer = L.geoJson(null, {
       </table>
       </div>
       <div class="footer">
-      <form action="`+ feature.properties.event_link + `" target="_parent">
+      <form action="`+ feature.properties.event_link + `" target="_blank">
         <button class="learnMoreBtn">
         Learn More...
         </button>
@@ -141,12 +141,12 @@ var customLayer = L.geoJson(null, {
       </table>
       </div>
       <div class="footer">
-      <form action="`+ feature.properties.event_link + `" target="_parent">
+      <form action="`+ feature.properties.event_link + `" target="_blank">
         <button class="learnMoreBtn">
         Learn More...
         </button>
       </form>
-      <form action="` + feature.properties.reg_link + `" target="_parent">
+      <form action="` + feature.properties.reg_link + `" target="_blank">
       </button>
       <button class="buyTicketsBtn">
       Reserve Your Spot
@@ -181,11 +181,11 @@ var customLayer = L.geoJson(null, {
     </table>
     </div>
     <div class="footer">
-    <form action="`+ feature.properties.event_link + `" target="_parent">
+    <form action="`+ feature.properties.event_link + `" target="_blank">
     <button class="learnMoreBtn">
     Learn More...
     </button>
-    <form action="` + feature.properties.reg_link + `" target="_parent">
+    <form action="` + feature.properties.reg_link + `" target="_blank">
     </button>
     <button class="buyTicketsBtn">
     Reserve Your Spot
@@ -216,10 +216,10 @@ var customLayer = L.geoJson(null, {
   </table>
   </div>
   <div class="footer">
-  <form action="`+ feature.properties.event_link + `" target="_parent">
+  <form action="`+ feature.properties.event_link + `" target="_blank">
   <button class="learnMoreBtn">
   Learn More...
-  <form action="` + feature.properties.reg_link + `" target="_parent">
+  <form action="` + feature.properties.reg_link + `" target="_blank">
   </button>
   <button class="buyTicketsBtn">
   Reserve Your Spot
@@ -250,7 +250,7 @@ var virtualPopupContentNoReg = `<div class="wrapper">
 </table>
 </div>
 <div class="footer">
-<form action="`+ feature.properties.event_link + `" target="_parent">
+<form action="`+ feature.properties.event_link + `" target="_blank">
 <button class="learnMoreBtn">
 Learn More...
 </button>
