@@ -143,3 +143,26 @@ html, body, #map {
   /* .hidden {
     display: none;
 } */
+
+@media (max-width: 768px) {
+  .leaflet-popup-content {
+    max-height: 60vh; /* Limit the maximum height */
+    overflow-y: auto; /* Add scrollbar if content overflows */
+  }
+  .photo {
+    display: flex;
+    width: 100px;
+    height: 100px;
+}
+}
+
+/* .map-click-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 999; 
+}
+ */
