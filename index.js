@@ -110,7 +110,7 @@ var customLayer = L.geoJson(null, {
       </table>
       </div>
       <div class="footer">
-      <form action="`+ feature.properties.event_link + `" target="_parent">
+      <form action="`+ feature.properties.event_link + `" >
         <button class="learnMoreBtn">
         Learn More...
         </button>
@@ -141,12 +141,12 @@ var customLayer = L.geoJson(null, {
       </table>
       </div>
       <div class="footer">
-      <form action="`+ feature.properties.event_link + `" target="_parent">
+      <form action="`+ feature.properties.event_link + `" >
         <button class="learnMoreBtn">
         Learn More...
         </button>
       </form>
-      <form action="` + feature.properties.reg_link + `" target="_parent">
+      <form action="` + feature.properties.reg_link + `" >
       </button>
       <button class="buyTicketsBtn">
       Reserve Your Spot
@@ -181,11 +181,11 @@ var customLayer = L.geoJson(null, {
     </table>
     </div>
     <div class="footer">
-    <form action="`+ feature.properties.event_link + `" target="_parent">
+    <form action="`+ feature.properties.event_link + `" >
     <button class="learnMoreBtn">
     Learn More...
     </button>
-    <form action="` + feature.properties.reg_link + `" target="_parent">
+    <form action="` + feature.properties.reg_link + `" >
     </button>
     <button class="buyTicketsBtn">
     Reserve Your Spot
@@ -216,10 +216,10 @@ var customLayer = L.geoJson(null, {
   </table>
   </div>
   <div class="footer">
-  <form action="`+ feature.properties.event_link + `" target="_parent">
+  <form action="`+ feature.properties.event_link + `" >
   <button class="learnMoreBtn">
   Learn More...
-  <form action="` + feature.properties.reg_link + `" target="_parent">
+  <form action="` + feature.properties.reg_link + `" >
   </button>
   <button class="buyTicketsBtn">
   Reserve Your Spot
@@ -250,7 +250,7 @@ var virtualPopupContentNoReg = `<div class="wrapper">
 </table>
 </div>
 <div class="footer">
-<form action="`+ feature.properties.event_link + `" target="_parent">
+<form action="`+ feature.properties.event_link + `" >
 <button class="learnMoreBtn">
 Learn More...
 </button>
@@ -296,19 +296,19 @@ Learn More...
   }
 
   if (feature.properties.full_address == "" && link_reg != ""){
-    layer.bindPopup(virtualPopupContent, {keepInView: true});
+    layer.bindPopup(virtualPopupContent); // keepInView: true
   }  
   else if (feature.properties.full_address == "" && link_reg == ""){
-    layer.bindPopup(virtualPopupContentNoReg, {keepInView: true});
+    layer.bindPopup(virtualPopupContentNoReg);
   }  
   else if (inperson_n_h == "Both in-person and virtual") {
-    layer.bindPopup(hybridPopupContent, {keepInView: true});
+    layer.bindPopup(hybridPopupContent);
   } 
   else if (link_reg != ""){
-    layer.bindPopup(popupContentReg, {keepInView: true});
+    layer.bindPopup(popupContentReg);
   }  
   else {
-    layer.bindPopup(popupContent, {keepInView: true});
+    layer.bindPopup(popupContent);
   }
 
   // layer.bindPopup(createPopUpContent(feature, popupTemplate));
@@ -512,3 +512,9 @@ zoomHome.addTo(map);
   
   // //And initialize the slider
   // sliderControl.startSlider();
+
+  // function closePopup() {
+  //   if(map.isPopupOpen()) {
+  //     map.closePopup
+  //     }
+  // }
